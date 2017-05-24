@@ -1,14 +1,18 @@
-
-
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('treat', 'assets/treat.png');
-    game.load.spritesheet('cat2', 'assets/cat2.png', 32, 48);
-}
+    game.load.spritesheet('ziggy', 'assets/ziggysprite.png', 32, 48);
+    game.load.image('enemy', 'assets/skate2.png')
 
+    //game frame will scale to page size
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
+    this.scale.setScreenSize(true); 
+}
 
 var player;
 var platforms;
@@ -18,6 +22,7 @@ var treats;
 var score = 0;
 var scoreText;
 
+var enemy;
 
 function create() {
 
@@ -43,7 +48,7 @@ function create() {
     ledge.body.immovable = true;
 
     // Define player & enable physics
-    player = game.add.sprite(32, game.world.height - 150, 'cat2');
+    player = game.add.sprite(32, game.world.height - 150, 'ziggy');
     game.physics.arcade.enable(player);
     player.body.bounce.y = 0.1;
     player.body.gravity.y = 300;
@@ -62,6 +67,21 @@ function create() {
         treat.body.bounce.y = 0.3 + Math.random() * 0.2;
         }
 
+    // Add enemies & enable physics
+    enemies = game.add.group();
+    enemies.enableBody = true;
+    game.physics.arcade.enable(enemies);
+
+  
+    for (var i = 0; i < 2; i++) {
+        var enemy = enemies.create(game.world.randomX, game.world.randomY, 'enemy');
+        enemy.body.gravity.y = 550;
+        enemy.body.bounce.y = 0.3 + Math.random() * 0.2;
+        enemy.body.velocity.setTo(10 + Math.random() * 40, 10 + Math.random() * 40);
+        enemy.body.collideWorldBounds = true;
+        }
+
+
     // Add score
     scoreText = game.add.text(15, 15, 'score: 0', {fontSize: '32px', fill: '#000'});
     
@@ -76,7 +96,9 @@ function update() {
     // Enable collision between player and platforms
     var hitPlatform = game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(treats, platforms);
-    game.physics.arcade.overlap(player, treats, collectStar, null, this);
+    game.physics.arcade.collide(enemies, platforms);
+    game.physics.arcade.overlap(player, treats, getTreat, null, this);
+    game.physics.arcade.overlap(player, enemies, killEnemy, null, this);
 
     // Define movement
     player.body.velocity.x = 0;
@@ -101,8 +123,7 @@ function update() {
         player.body.velocity.y = -350;
     }
 
-
-    function collectStar (player, treat) {
+    function getTreat (player, treat) {
         //treat removed from screen
         treat.kill();
 
@@ -110,4 +131,15 @@ function update() {
         score += 1;
         scoreText.text = 'Score: ' + score;
     }
+
+    function killEnemy (player, enemy) {
+        //enemy removed from screen
+        enemy.kill();
+
+        //update score
+        score += 10;
+        scoreText.text = 'Score: ' + score;
+    }
 }   
+
+
