@@ -4,8 +4,10 @@ function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('treat', 'assets/treat.png');
-    game.load.spritesheet('ziggy', 'assets/ziggysprite.png', 32, 48);
+    game.load.spritesheet('ziggy', 'assets/ziggysprite2.png', 32, 48);
     game.load.image('enemy', 'assets/skate2.png')
+    //  Firefox doesn't support mp3, use ogg
+    game.load.audio('interstellar', ['assets/interstellar.mp3', 'assets/interstellar.ogg']);
 
     //game frame will scale to page size
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -25,6 +27,10 @@ var scoreText;
 var enemy;
 
 function create() {
+
+    // Add music
+    music = game.add.audio('interstellar');
+    music.play();
 
     //  Enable physics - Arcade Physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -134,12 +140,15 @@ function update() {
 
     function killEnemy (player, enemy) {
         //enemy removed from screen
-        enemy.kill();
+         if ( enemy.body.touching.up )    {          
+            enemy.kill();   
+
+       }   
+        else     {      
+             player.kill();    
 
         //update score
         score += 10;
         scoreText.text = 'Score: ' + score;
-    }
-}   
-
+}}}
 
