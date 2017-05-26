@@ -3,6 +3,8 @@ README
 Ziggy's Great Escape!
 
 A Game by Ellen Finnegan
+https://github.com/efinn
+https://twitter.com/ellefinnegan
 
 
 --Info--
@@ -19,3 +21,4 @@ Thanks to the following people, who generously released their art under Creative
 
 1. Ziggy cat sprite modified from dogchicken's "Cat Fighter Sprite Sheet" on opengameart.org
 2. Music ("Interstellar" track) by sawsquarenoise on freemusicarchive.org
+3. Platform graphics created by kenney as hosted on opengameart.org and www.kenney.nl
