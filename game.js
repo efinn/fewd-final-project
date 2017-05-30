@@ -5,7 +5,7 @@ function preload() {
     game.load.image('ground', 'assets/platform2.png');
     game.load.image('treat', 'assets/treat.png');
     game.load.spritesheet('ziggy', 'assets/ziggysprite2.png', 32, 48);
-    game.load.image('enemy', 'assets/skate2.png')
+    game.load.spritesheet('enemy', 'assets/mouse.png')
     //  Firefox doesn't support mp3, use ogg
     game.load.audio('interstellar', ['assets/interstellar.mp3', 'assets/interstellar.ogg']);
     //game frame will scale to page size
@@ -56,7 +56,7 @@ function create() {
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
     
-    // Add treats
+    // Add treats for Ziggy to gather
     treats = game.add.group();
     treats.enableBody = true;
         
@@ -66,7 +66,7 @@ function create() {
             treat.body.bounce.y = 0.3 + Math.random() * 0.2;
     }
 
-    // Add enemies & enable physics
+    // Add enemies & enable physics for them
     enemies = game.add.group();
     enemies.enableBody = true;
     game.physics.arcade.enable(enemies);
@@ -117,7 +117,7 @@ function update() {
         //treat removed from screen
         treat.kill();
 
-        //update score
+        //update score by 1
         score += 1;
         scoreText.text = 'Score: ' + score;
     }
@@ -129,10 +129,10 @@ function update() {
         }   
         else {      
             player.kill();   
-            alert('Don\'t let the skateboards hit you! Try again.');
+            alert('Don\'t let the enemies hit you! Try again.');
             location.reload(); 
         }
-        //update score
+        //update score by 10
         score += 10;
         scoreText.text = 'Score: ' + score;
     }
