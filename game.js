@@ -81,7 +81,7 @@ function create() {
     }
 
     // Add score
-    scoreText = game.add.text(15, 15, 'score: 0', {fontSize: '32px', fill: '#000'});
+    scoreText = game.add.text(15, 15, 'Score: 0' + '/20', {fontSize: '32px', fill: '#000'});
     
     // Add controls
     cursors = game.input.keyboard.createCursorKeys();
@@ -94,7 +94,6 @@ function update() {
     game.physics.arcade.collide(enemies, platforms);
     game.physics.arcade.overlap(player, treats, getTreat, null, this);
     game.physics.arcade.overlap(player, enemies, killEnemy, null, this);
-
 
     //when score hits 20, you win!
      if (score >= 20) {
@@ -126,7 +125,7 @@ function update() {
 
         //update score by 1
         score += 1;
-        scoreText.text = 'Score: ' + score;
+        scoreText.text = 'Score: ' + score + '/20';
     }
 
     //enemy removed from screen
@@ -141,7 +140,7 @@ function update() {
         }
         //update score by 10
         score += 10;
-        scoreText.text = 'Score: ' + score;
+        scoreText.text = 'Score: ' + score + '/20';
 
     }
 
