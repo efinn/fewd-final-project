@@ -1,123 +1,57 @@
-/*
-Project Name: Ellen Finnegan FEWD 28 Boston Final Project
-Author: Ellen Finnegan
-*/
 
-/******************************************
-/* SETUP
-/*******************************************/
 
-/* Box Model Hack */
+/*green 00f0a8
+grey 282d32*/
+
+.container {
+    width: 400px;
+    margin: 0 auto; /*center container*/
+
+}
+
 * {
-  -moz-box-sizing: border-box; /* Firexfox */
-  -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
-  box-sizing: border-box; /* IE */
+	color: #00f0a8;
+	background-color: #282d32;
+
 }
 
-/* Clear fix hack */
-.clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
+.ziggy-image {
+	max-width:300px;
+			margin: 50px;
+
 }
 
-
-/******************************************
-/* BASE STYLES
-/*******************************************/
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  color: #000;
-  font-size: 24px;
-  background-color: #6BCCFF;
-  margin: 0;
+.about {
+	text-align: center;
 }
 
-div {
-  border: 5px solid pink;
+h1 {
+	font-size:25px;
 }
 
-#title {
-  text-align: center;
-  font-size: 40px;
-  border: 5px solid #FF964E;
-  padding: 10px;
-  width: 50%;
-}
- 
- #main {
-  padding: 20%;
- }
-
-/******************************************
-/* LAYOUT
-/*******************************************/
-
-/* Center the container */
-#container {
-  width: auto;
-  margin: auto;
-  background-color: #6BCCFF;
-  text-decoration: none;
+h2 {
+	font-size:21px;
 }
 
-#phaser-game {
-    display: block;
-    width: 800px;
-    height: 600px;
+h1, h2 {
+	font-family:Courier New;
+	text-decoration:none;
+	margin: 50px;
 }
 
-#about {
-    display: block;
-    align-content: center;
-    width: 50%;
-    height: 50%;
+.playbutton {
+	background-color:#00f0a8;
+	border-radius:30px;
+	border:1px solid #00f0a8;
+	display:inline-block;
+	color:#282d32;
+	font-family:Courier New;
+	font-size:21px;
+	padding:15px 31px;
+	text-decoration:none;
 }
 
-.social {
-  margin-left: 425px;
-  margin-right: 425px;
+.playbutton:active {
+	position:relative;
+	top:1px; /*moves button when pressed*/
 }
-
-
-.twitter {
-  margin: 20px;
-  float: left;
-  clear: all;
-}
-
-.linkedin {
-  margin: 20px;
-  width: 15%;
-  float: right;
-}
-
-footer {
-  background-color: #121212;
-  text-align: center;
-  color: white;
-}
-
-.copy {
-  font-size: 14px;
-  padding: 100px;
-}
-
-
-/******************************************
-/* ADDITIONAL STYLES
-/*******************************************/
-
-/*
-
-blue #6BCCFF
-orange #FF964E
-
-
-Main column width: 700px
-Sidebar width: 240px
-Gutter: 20px
