@@ -5,7 +5,7 @@ function preload() {
     game.load.image('ground', 'assets/platform2.png');
     game.load.image('treat', 'assets/treat.png');
     game.load.spritesheet('ziggy', 'assets/ziggysprite2.png', 32, 48);
-    game.load.spritesheet('enemy', 'assets/mouse.png', 32, 48);
+    game.load.image('enemy', 'assets/mouse2.png');
     //  Firefox doesn't support mp3, use ogg
     game.load.audio('interstellar', ['assets/interstellar.mp3', 'assets/interstellar.ogg']);
     //game frame will scale to page size
@@ -62,7 +62,7 @@ function create() {
     enemies.enableBody = true;
     game.physics.arcade.enable(enemies);
   
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 3; i++) {
         var enemy = enemies.create(game.world.randomX, game.world.randomY, 'enemy');
         enemy.body.gravity.y = 550;
         enemy.body.bounce.y = 0.3 + Math.random() * 0.2;
@@ -94,6 +94,13 @@ function update() {
     game.physics.arcade.collide(enemies, platforms);
     game.physics.arcade.overlap(player, treats, getTreat, null, this);
     game.physics.arcade.overlap(player, enemies, killEnemy, null, this);
+
+
+    //when score hits 20, you win!
+     if (score >= 20) {
+        alert('YOU WON.');
+        location.reload(); 
+    }
 
     player.body.velocity.x = 0;
     if (cursors.left.isDown) {
@@ -135,5 +142,8 @@ function update() {
         //update score by 10
         score += 10;
         scoreText.text = 'Score: ' + score;
+
     }
+
+
 }
